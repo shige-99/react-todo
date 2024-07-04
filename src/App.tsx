@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-import { TodoList } from "./components/TodoList";
+import { TodoList } from './components/TodoList';
+import { AddTodoForm } from './components/AddTodoForm';
 
-import { dummyTodoList } from "./data/dummyTodoList";
+import { dummyTodoList } from './data/dummyTodoList';
 
 function App() {
   const [todoList, setTodoList] = useState(dummyTodoList);
@@ -26,17 +27,33 @@ function App() {
     });
   };
 
+  // Todoを追加
+  const addTodo = (title: string) => {
+    setTodoList((prevTodoList) => {
+      // 新しいTodoを作成
+      const newTodo = {
+        id: Date.now(),
+        title,
+        completed: false,
+      };
+
+      // 変更前のTodoリストと合わせる
+      return [newTodo, ...prevTodoList];
+    });
+  };
+
+
   return (
-    <main className="mx-auto mt-10 max-w-xl">
-      <h1 className="text-center text-4xl p-2">Todoアプリ</h1>
-      <div className="rounded bg-slate-200 p-5">
-        <div className="space-y-3">
+    <main className="mx-auto mt-10 max-w-xl space-y-10">
+      <h1 className="text-center text-4xl">Todoアプリ</h1>
+      <div className="space-y-5">
+        <AddTodoForm addTodo={addTodo} />
+        <div className="rounded bg-slate-200 p-5">
           <TodoList todoList={todoList} changeCompleted={changeCompleted} />
         </div>
       </div>
     </main>
   );
 }
-
 
 export default App;
