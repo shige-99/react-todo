@@ -42,6 +42,16 @@ function App() {
     });
   };
 
+  // 対象のTodoを削除
+  const deleteTodo = (id: number) => {
+    setTodoList((prevTodoList) => {
+      // 対象のidでないTodoを残す
+      return prevTodoList.filter((todo) => {
+        return todo.id !== id;
+      });
+    });
+  };
+
 
   return (
     <main className="mx-auto mt-10 max-w-xl space-y-10">
@@ -49,7 +59,11 @@ function App() {
       <div className="space-y-5">
         <AddTodoForm addTodo={addTodo} />
         <div className="rounded bg-slate-200 p-5">
-          <TodoList todoList={todoList} changeCompleted={changeCompleted} />
+          <TodoList
+            todoList={todoList}
+            changeCompleted={changeCompleted}
+            deletedTodo={deleteTodo}
+          />
         </div>
       </div>
     </main>
