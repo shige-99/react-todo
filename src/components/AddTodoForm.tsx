@@ -27,7 +27,7 @@ export const AddTodoForm = ({ addTodo }: Props) => {
     >
       <input
         type="text"
-        placeholder="新しいTodoを入力してください"
+        placeholder="Enter New TODO"
         className="grow rounded-s bg-slate-200 p-2"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
